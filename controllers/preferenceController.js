@@ -5,8 +5,8 @@ exports.savePreferences = async (req, res) => {
     try {
         const existingPreference = await Preference.findOne({ userId });
         if (existingPreference) {
-            exisitingPreference.dietaryRestrictions = dietaryRestrictions || [];
-            exisitingPreference.allergies = allergies || [];
+            existingPreference.dietaryRestrictions = dietaryRestrictions || [];
+            existingPreference.allergies = allergies || [];
             await existingPreference.save();
         } else {
             const newPreference = new Preference({ userId, dietaryRestrictions, allergies });
