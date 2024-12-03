@@ -14,6 +14,10 @@ const preferenceSchema = new mongoose.Schema({
         type: [String],
         default: []
     },
+    foodPreferences: {
+        type: [String],
+        default: []
+    }
 });
 
 module.exports = mongoose.model('Preference', preferenceSchema);
