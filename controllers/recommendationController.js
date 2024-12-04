@@ -3,7 +3,7 @@ const axios = require('axios');
 
 exports.getRecommendations = async (req, res) => {
     const userId = req.params.userId;
-    const ingredients = req.body.ingredients;
+    const { ingredients, ignorePantry } = req.body;
     const preferences = await Preference.findOne({ userId });
 
     if (!ingredients) {
@@ -17,6 +17,7 @@ exports.getRecommendations = async (req, res) => {
                     params: {
                         ingredients: ingredients.join(','),
                         ranking: 2,
+                        ignorePantry: ignorePantry,
                         apiKey: process.env.SPOONACULAR_API_KEY
                     }
                 }
@@ -34,6 +35,7 @@ exports.getRecommendations = async (req, res) => {
                         ingredients: ingredients.join(','),
                         ranking: 2,
                         apiKey: process.env.SPOONACULAR_API_KEY,
+                        ignorePantry: ignorePantry,
                         diet: preferences.dietaryRestrictions.join(',') || 'none',
                         intolerances: preferences.allergies.join(',') || 'none',
                     }
