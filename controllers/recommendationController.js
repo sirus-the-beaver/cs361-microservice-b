@@ -4,9 +4,17 @@ const axios = require('axios');
 exports.getRecommendations = async (req, res) => {
     const { ingredients, ignorePantry, userId } = req.body;
     const preferences = await Preference.findOne({ userId });
+    let excludedRecipes = [];
 
     if (!ingredients) {
         return res.status(400).json({ error: 'No ingredients provided' });
+    }
+
+    try {
+        const response = await axios.get(`http://localhost:5011/excludedRecipes/${userId}`);
+        excludedRecipes = response.data;
+    } catch (error) {
+        console.error('Error fetching excluded recipes', error);
     }
 
     if (!preferences) {
@@ -22,7 +30,9 @@ exports.getRecommendations = async (req, res) => {
                 }
             );
 
-            return res.status(200).json(response.data.results);
+            const recipes = response.data.results.filter(recipe => !excludedRecipes.includes(recipe.id.toString()));
+
+            return res.status(200).json(recipes);
         } catch (error) {
             return res.status(500).json({ error: 'Error fetching recommendations' });
         }
@@ -41,7 +51,9 @@ exports.getRecommendations = async (req, res) => {
                 }
             );
 
-            return res.status(200).json(response.data.results);
+            const recipes = response.data.results.filter(recipe => !excludedRecipes.includes(recipe.id.toString()));
+
+            return res.status(200).json(recipes);
         } catch (error) {
             return res.status(500).json({ error: 'Error fetching recommendations with preferences' });
         }
