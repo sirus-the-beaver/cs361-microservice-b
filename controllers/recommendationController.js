@@ -21,6 +21,8 @@ exports.getRecommendations = async (req, res) => {
                     }
                 }
             );
+
+            return res.status(200).json(response.data.results);
         } catch (error) {
             return res.status(500).json({ error: 'Error fetching recommendations' });
         }
