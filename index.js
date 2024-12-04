@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const preferenceRoutes = require('./routes/preferenceRoutes');
+const recommendationRoutes = require('./routes/recommendationRoutes');
 
 dotenv.config();
 const app = express();
@@ -14,6 +15,7 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTop
     .catch(err => console.error('Error connecting to MongoDB', err));
 
 app.use(preferenceRoutes);
+app.use(recommendationRoutes);
 
 app.listen(process.env.PORT, () => {
     console.log(`Server is running on port ${process.env.PORT}`);
