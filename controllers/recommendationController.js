@@ -2,8 +2,7 @@ const Preference = require('../models/Preference');
 const axios = require('axios');
 
 exports.getRecommendations = async (req, res) => {
-    const userId = req.params.userId;
-    const { ingredients, ignorePantry } = req.body;
+    const { ingredients, ignorePantry, userId } = req.body;
     const preferences = await Preference.findOne({ userId });
 
     if (!ingredients) {
