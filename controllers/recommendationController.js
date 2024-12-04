@@ -14,7 +14,7 @@ exports.getRecommendations = async (req, res) => {
             const response = await axios.get('https://api.spoonacular.com/recipes/complexSearch', 
                 {
                     params: {
-                        ingredients: ingredients.join(','),
+                        includeIngredients: ingredients.join(','),
                         ranking: 2,
                         ignorePantry: ignorePantry,
                         apiKey: process.env.SPOONACULAR_API_KEY
@@ -31,7 +31,7 @@ exports.getRecommendations = async (req, res) => {
             const response = await axios.get('https://api.spoonacular.com/recipes/complexSearch', 
                 {
                     params: {
-                        ingredients: ingredients.join(','),
+                        includeIngredients: ingredients.join(','),
                         ranking: 2,
                         apiKey: process.env.SPOONACULAR_API_KEY,
                         ignorePantry: ignorePantry,
