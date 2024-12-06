@@ -2,6 +2,7 @@ const Preference = require('../models/Preference');
 const axios = require('axios');
 
 exports.getRecommendations = async (req, res) => {
+    const userToken = req.header('Authorization')?.split(' ')[1];
     const { ingredients, ignorePantry, userId } = req.body;
     const preferences = await Preference.findOne({ userId });
     let excludedRecipes = [];
@@ -11,7 +12,12 @@ exports.getRecommendations = async (req, res) => {
     }
 
     try {
-        const response = await axios.get(`https://dishfindr-microservice-c-ca58d83577d1.herokuapp.com/excluded-recipes/${userId}`);
+        const response = await axios.get(`https://dishfindr-microservice-c-ca58d83577d1.herokuapp.com/excluded-recipes/${userId}`,
+            {
+                headers: {
+                    Authorization: `Bearer ${userToken}`
+                }
+            });
         excludedRecipes = response.data;
     } catch (error) {
         console.error('Error fetching excluded recipes', error);
