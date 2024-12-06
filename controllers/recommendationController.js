@@ -11,7 +11,7 @@ exports.getRecommendations = async (req, res) => {
     }
 
     try {
-        const response = await axios.get(`http://localhost:5011/excludedRecipes/${userId}`);
+        const response = await axios.get(`http://localhost:5005/excludedRecipes/${userId}`);
         excludedRecipes = response.data;
     } catch (error) {
         console.error('Error fetching excluded recipes', error);
