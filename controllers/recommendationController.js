@@ -11,7 +11,7 @@ exports.getRecommendations = async (req, res) => {
     }
 
     try {
-        const response = await axios.get(`https://dishfindr-microservice-c-ca58d83577d1.herokuapp.com/excludedRecipes/${userId}`);
+        const response = await axios.get(`https://dishfindr-microservice-c-ca58d83577d1.herokuapp.com/excluded-recipes/${userId}`);
         excludedRecipes = response.data;
     } catch (error) {
         console.error('Error fetching excluded recipes', error);
