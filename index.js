@@ -4,6 +4,7 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const preferenceRoutes = require('./routes/preferenceRoutes');
 const recommendationRoutes = require('./routes/recommendationRoutes');
+const authMiddleware = require('./middleware/authMiddleware');
 
 dotenv.config();
 const app = express();
@@ -14,6 +15,7 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTop
     .then(() => console.log('Connected to MongoDB'))
     .catch(err => console.error('Error connecting to MongoDB', err));
 
+app.use(authMiddleware);
 app.use(preferenceRoutes);
 app.use(recommendationRoutes);
 
