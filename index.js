@@ -9,7 +9,7 @@ const authMiddleware = require('./middleware/authMiddleware');
 dotenv.config();
 const app = express();
 
-const allowedOrigins = ['https://dishfindr-4d3c3b6f3b94.herokuapp.com/', 'https://dishfindr-microservice-c-ca58d83577d1.herokuapp.com/'];
+const allowedOrigins = ['https://dishfindr-4d3c3b6f3b94.herokuapp.com', 'https://dishfindr-microservice-c-ca58d83577d1.herokuapp.com'];
 app.use(cors(
     {
         origin: function (origin, callback) {
