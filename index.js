@@ -8,7 +8,20 @@ const authMiddleware = require('./middleware/authMiddleware');
 
 dotenv.config();
 const app = express();
-app.use(cors());
+
+const allowedOrigins = ['https://dishfindr-4d3c3b6f3b94.herokuapp.com/', 'https://dishfindr-microservice-c-ca58d83577d1.herokuapp.com/'];
+app.use(cors(
+    {
+        origin: function (origin, callback) {
+            if (!origin) return callback(null, true);
+            if (allowedOrigins.indexOf(origin) === -1) {
+                const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+                return callback(new Error(msg), false);
+            }
+            return callback(null, true);
+        }
+    }
+));
 app.use(express.json());
 
 mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
