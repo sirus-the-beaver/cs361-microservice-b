@@ -31,3 +31,41 @@ This microservice handles getting and saving user preferences (such as dietary r
     "allergies": ["String"]
 }
 ```
+
+```POST /preferences```
+- **Description**: Saves/updates a user's preferences to the database.
+- **Request Body**:
+```json
+{
+    "userId": "String",
+    "dietaryRestrictions": ["String"],
+    "allergies": ["String"]
+}
+```
+
+```POST /recommendations```
+- **Description**: Gets recipe recommendations based on a user's preferences, and excludes results that the user has purposely excluded.
+- **Request Body**:
+```json
+{
+    "ingredients": ["String"],
+    "ignorePantry": Boolean,
+    "userId": "String"
+}
+```
+- **Response**:
+```json
+{
+    "offset": Number,
+    "number": Number,
+    "results": [
+        {
+            "id": Number,
+            "title": "String",
+            "image": "String",
+            "imageType": "String"
+        }
+    ],
+    "totalResults": Number
+}
+```
