@@ -1,7 +1,7 @@
 # User Preferences Microservice
 
 ## Overview
-This microservice handles getting and saving user preferences (such as dietary restrictions and allergies), and getting recipe recommendations based on a user's preferences.
+This microservice handles getting and saving user preferences (such as dietary restrictions and allergies), and getting recipe recommendations based on a user's preferences, a user's excluded recipes, and inputted ingredients.
 
 ## Features
 - Setting preferences
